@@ -11,7 +11,9 @@ const styles = theme => ({
   },
   tag: {
     color: theme.palette.primary.contrastText,
+    /* eslint-disable */
     fontFamily: "'Roboto Condensed', sans-serif",
+    /* eslint-disable */
     fontSize: 14,
     fontWeight: 400,
     letterSpacing: '0.5px',

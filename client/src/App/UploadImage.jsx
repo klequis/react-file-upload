@@ -11,7 +11,7 @@ class UploadImage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log('this.fileInput.files[0]', this.fileInput.files[0])
+    // console.log('this.fileInput.files[0]', this.fileInput.files[0])
     let formData = new FormData()
     formData.append('upload', this.fileInput.files[0])
     this.props.requestUploadOneImage(formData)
