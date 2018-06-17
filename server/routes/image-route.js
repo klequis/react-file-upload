@@ -1,7 +1,5 @@
 import express from 'express'
 const router = express.Router()
-import Event from '../models/event'
-import { isValidObjectID } from '../db/utils'
 import { append, pick } from 'ramda'
 import formidable from 'formidable'
 import { red, blue, yellow } from '../logger'
@@ -24,27 +22,27 @@ router.post('/', async (req, res) => {
       const newFileName = path.join(form.uploadDir, file.name)
       fs.rename(file.path, newFileName, function () {
         fs.readFile(newFileName, (err, data) => {
-          if (err) throw err;
+          if (err) throw err
           const s3 = new S3()
           const params = {Bucket: bucketName, Key: file.name, Body: data}
           s3.upload(params, function(err, data) {
-            console.log('done', err, data);
+            console.log('done', err, data)
             const ret = pick(['Location', 'Key'], data)
             res.send(ret)
-          });
-        });
+          })
+        })
 
-      });
-    });
+      })
+    })
     form.on('error', function(err) {
       red('** form.on.error')
-      console.log('An error has occured: \n' + err);
-    });
+      console.log('An error has occured: \n' + err)
+    })
     form.on('end', function() {
       red('** form.on.end')
       // res.status(200).send({"message": "done"})
-    });
-    form.parse(req);
+    })
+    form.parse(req)
   } catch(e) {
     // red('events.route: post', e)
     red('error', e)

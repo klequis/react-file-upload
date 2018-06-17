@@ -11,9 +11,11 @@ const wrapper = {
 }
 
 class UploadImage extends React.Component {
+
   state = {
     currentImage: this.props.currentImage
   }
+
   handleSubmit = (event) => {
     event.preventDefault()
     // console.log('this.fileInput.files[0]', this.fileInput.files[0])
@@ -28,20 +30,21 @@ class UploadImage extends React.Component {
   }
 
   currentImage = () => {
-    const img = this.props.currentImage
-    green('img', img)
+    const img = this.props.currentImageLocation
+    // green('img', img)
     // green('img.Location', img.Location)
     if (isNil(img)) {
-      green('currentImage: returning null')
+      // green('currentImage: returning null')
       return null
     } else {
-      green('currentImage: returning <img')
+      // green('currentImage: returning <img')
       return <img src={img} alt='uploaded image' />
     }
 
   }
 
   render() {
+    const { currentImageName } = this.props
     return (
       <div style={wrapper}>
         <form onSubmit={this.handleSubmit}>
@@ -59,8 +62,8 @@ class UploadImage extends React.Component {
           <button type="submit">Submit</button><br />
           <button type="button" onClick={this.handleGetClick}>GET</button>
         </form>
-        {this.currentImage()}
-        {/* <img src='https://photo-app-tvc.s3.us-west-2.amazonaws.com/img04.jpg' alt='last uploaded' /> */}
+        {this.currentImage()} <br />
+        {currentImageName}
       </div>
     )
   }
@@ -68,7 +71,8 @@ class UploadImage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentImage: imageSelectors.getCurrentImage(state)
+    currentImageLocation: imageSelectors.getCurrentImageLocation(state),
+    currentImageName: imageSelectors.getCurrentImageName(state),
   }
 }
 export default connect(mapStateToProps, imageActions)(UploadImage)
