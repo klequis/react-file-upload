@@ -25,10 +25,11 @@ export const fetchUploadImage = (url, options = {}) => (
     ...options,
     headers: {
       ...options.headers,
+      'Accept': 'application/json',
     },
   })
   .then(rejectErrors)
-  .then(res => res.send())
+  .then(res => res.json())
 )
 
 export default { fetchJson, fetchUploadImage }

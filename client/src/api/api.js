@@ -1,5 +1,5 @@
 import { fetchJson, fetchUploadImage } from './api-helpers'
-import { pink } from 'logger'
+import { pink, red } from 'logger'
 
 export default {
   images: {
@@ -13,6 +13,19 @@ export default {
       ).then((data) => {
         pink('/images/create', data)
         return data
+      }).catch(e => {
+        red('api.images.create: ERROR: ', e)
+      })
+    },
+    getTest() {
+      return fetchJson(
+        '/images/test',
+        { method: 'GET' }
+      ).then(data => {
+        pink('api.images.getTest: data', data)
+        return data
+      }).catch(e => {
+        console.log('api.images.getTest ERROR: ', e)
       })
     }
   },

@@ -18,6 +18,10 @@ class UploadImage extends React.Component {
 
   }
 
+  handleGetClick = () => {
+    this.props.requestGetTest()
+  }
+
   render() {
     return (
       <div style={wrapper}>
@@ -33,7 +37,8 @@ class UploadImage extends React.Component {
             />
           </label>
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit">Submit</button><br />
+          <button type="button" onClick={this.handleGetClick}>GET</button>
         </form>
       </div>
     )
