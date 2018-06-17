@@ -14,11 +14,6 @@ const app = express()
 const port = process.env.PORT
 
 
-if (process.env.NODE_ENV !== 'test') {
-  yellow('env', process.env.NODE_ENV)
-  connectToMongo()
-}
-
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
