@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 import Event from '../models/event'
 import { isValidObjectID } from '../db/utils'
-import { append } from 'ramda'
+import { append, pick } from 'ramda'
 import formidable from 'formidable'
 import { red, blue, yellow } from '../logger'
 import path from 'path'
@@ -29,7 +29,8 @@ router.post('/', async (req, res) => {
           const params = {Bucket: bucketName, Key: file.name, Body: data}
           s3.upload(params, function(err, data) {
             console.log('done', err, data);
-            res.send(data)
+            const ret = pick(['Location', 'Key'], data)
+            res.send(ret)
           });
         });
 
